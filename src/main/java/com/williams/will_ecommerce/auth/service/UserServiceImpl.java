@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         log.info(user.getId() == null ? "Creating User" : "Updating User");
         try {
             User userSave = this.userRepository.save(user);
-            log.info("User save correct");
+            log.info("User saveCar correct");
             return userSave;
         } catch (Exception e) {
             log.error("Error trying to create user",e);

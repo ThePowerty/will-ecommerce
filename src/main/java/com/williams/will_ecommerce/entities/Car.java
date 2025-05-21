@@ -19,12 +19,16 @@ public class Car {
     private LocalDate year;
     private String color;
     private String engine_type;
+    @Enumerated(EnumType.STRING)
     private Transmission transmission;
     private Integer kilometers;
+    @Enumerated(EnumType.STRING)
     private FuelType fuelType;
     private Integer doors;
     private Integer seats;
+    @Enumerated(EnumType.STRING)
     private Type type;
+    @Enumerated(EnumType.STRING)
     private Status status;
     private Double price;
     private String description;

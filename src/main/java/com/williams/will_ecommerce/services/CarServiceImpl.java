@@ -61,14 +61,14 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car save(Car car) {
+    public Car saveCar(Car car) {
         log.info(car.getId() == null ? "Creating car" : "Updating car");
         return this.carRepository.save(car);
     }
 
     @Override
     public void deleteById(Long id) {
-        log.info("Deleting car by id");
+        log.info("Deleting car by id: {}", id);
         this.carRepository.deleteById(id);
     }
 

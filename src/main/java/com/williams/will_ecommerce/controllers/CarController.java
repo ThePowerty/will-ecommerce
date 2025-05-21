@@ -25,9 +25,10 @@ public class CarController {
     }
 
     @GetMapping
-    public List<Car> findAll(){
+    public ResponseEntity<List<Car>> findAll(){
         log.info("REST request to find all cars");
-        return this.carServiceImpl.findAll();
+        List<Car> cars = this.carServiceImpl.findAll();
+        return ResponseEntity.ok(cars);
     }
 
     @GetMapping("/{id}")
@@ -42,10 +43,12 @@ public class CarController {
 
     // Buscar coches por número de puertas
     @GetMapping("/doors/{doors}")
-    public List<Car> findByDoors(@PathVariable Integer doors) {
+    public ResponseEntity<List<Car>> findByDoors(@PathVariable Integer doors) {
         log.info("REST request to find car by doors");
 
-        return this.carServiceImpl.findByDoors(doors);
+        List<Car> cars = this.carServiceImpl.findByDoors(doors);
+
+        return ResponseEntity.ok(cars);
     }
 
     // Buscar coches por fabricante
@@ -84,10 +87,10 @@ public class CarController {
     }
 
     @PostMapping
-    public ResponseEntity<Car> save(@RequestBody Car car){
-        log.info("REST request to create a new car");
+    public ResponseEntity<Car> saveCar(@RequestBody Car car){
+        log.info("REST request to save a car");
 
-        return ResponseEntity.ok(this.carServiceImpl.save(car));
+        return ResponseEntity.ok(this.carServiceImpl.saveCar(car));
     }
 
     @DeleteMapping("/{id}")
@@ -95,6 +98,15 @@ public class CarController {
         log.info("REST request to delete an existing car");
 
         this.carServiceImpl.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/many/{list}")
+    public ResponseEntity<Car> deleteAllById(@PathVariable List<Long> list){
+        log.info("REST request to delete cars by list");
+
+        this.carServiceImpl.deleteAllById(list);
 
         return ResponseEntity.noContent().build();
     }

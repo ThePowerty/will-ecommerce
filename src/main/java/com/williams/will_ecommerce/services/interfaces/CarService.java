@@ -6,7 +6,6 @@ import com.williams.will_ecommerce.entities.utils.Status;
 import com.williams.will_ecommerce.entities.utils.Transmission;
 import com.williams.will_ecommerce.entities.utils.Type;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +15,7 @@ public interface CarService {
 
     Optional<Car> findById(Long id);
 
-    Car save(Car car);
+    Car saveCar(Car car);
 
     void deleteById(Long id);
 

@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UserController {
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
-    private UserService userService;
+    protected UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -32,40 +32,10 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> findAll() {
+    public ResponseEntity<List<User>> findAll() {
         log.info("REST request to find all user");
-        return userService.findAll();
-    }
-
-    @PutMapping("/permission/{id}")
-    public ResponseEntity<User> updateRole(@PathVariable Long id) {
-        if (this.userService.findById(id).isPresent()) {
-            User user = this.userService.findById(id).get();
-
-            if (user.getRole().equals(Role.CUSTOMER)) {
-                user.setRole(Role.ADMINISTRATOR);
-                log.info("REST request to update Role ADMINISTRATOR a user with id: " + user.getId());
-
-                return ResponseEntity.ok(this.userService.save(user));
-            }
-        }
-        log.warn("Update Role failed");
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PutMapping("/permission/revoque/{id}")
-    public ResponseEntity<User> revoqueRole(@PathVariable Long id) {
-        if (this.userService.findById(id).isPresent()) {
-            User user = this.userService.findById(id).get();
-
-            if (!user.getRole().equals(Role.CUSTOMER)) {
-                user.setRole(Role.CUSTOMER);
-                log.info("REST request to revoque Role ADMINISTRATOR a user with id: " + user.getId());
-
-                return ResponseEntity.ok(this.userService.save(user));
-            }
-        }
-        return ResponseEntity.badRequest().build();
+        List<User> users = userService.findAll();
+        return ResponseEntity.ok(users);
     }
 
     @DeleteMapping("/{id}")
@@ -85,8 +55,9 @@ public class UserController {
     }
 
     @GetMapping("/role/{role}")
-    public List<User> findByRole(@PathVariable Role role) {
+    public ResponseEntity<List<User>> findByRole(@PathVariable Role role) {
         log.info("REST request to find user by Role: " + role.name());
-        return this.userService.findByRole(role);
+        List<User> users = this.userService.findByRole(role);
+        return ResponseEntity.ok(users);
     }
 }

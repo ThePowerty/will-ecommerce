@@ -43,8 +43,8 @@ public class SecurityConfig {
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> {
                             authorize.requestMatchers("/auth/**").permitAll();
-                            authorize.requestMatchers(HttpMethod.PUT,"/user/permission/**").hasAuthority(Permission.UPDATE_ROLE.name());
-                            authorize.requestMatchers(HttpMethod.DELETE,"/user/**").hasAuthority(Permission.DELETE.name());
+                            authorize.requestMatchers(HttpMethod.PUT,"/user/permission/**").hasAuthority(Permission.MANAGE_ROLES.name());
+                            authorize.requestMatchers(HttpMethod.DELETE,"/user/**").hasAuthority(Permission.DELETE_USERS.name());
                             authorize.anyRequest().authenticated();
                         }
                 )

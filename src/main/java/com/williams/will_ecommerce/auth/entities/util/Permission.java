@@ -1,9 +1,27 @@
 package com.williams.will_ecommerce.auth.entities.util;
 
 public enum Permission {
-    READ,
-    UPDATE,
-    SAVE,
-    DELETE,
-    UPDATE_ROLE
+    CREATE_USERS,
+    READ_USERS,
+    UPDATE_USERS,
+    DELETE_USERS,
+
+    MANAGE_ROLES,
+
+    CREATE_EMPLOYEES,
+    READ_EMPLOYEES,
+    UPDATE_EMPLOYEES,
+    DELETE_EMPLOYEES,
+
+    CREATE_VEHICLES,
+    READ_VEHICLES,
+    UPDATE_VEHICLES,
+    DELETE_VEHICLES,
+
+    CREATE_SALES,
+    READ_SALES,
+    UPDATE_SALES,
+    DELETE_SALES,
+
+    MAKE_PURCHASES
 }
